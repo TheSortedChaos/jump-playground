@@ -14,6 +14,8 @@ libraryDependencies ++= Seq(
   "com.github.pureconfig" % "pureconfig_2.13" % "0.12.1",
   // math
   "org.joml" % "joml" % "1.9.19",
+  // utils
+  "org.sorted.chaos" %% "wavefront-reader" % "0.1.0-SNAPSHOT",
   // testing
   "org.scalactic" %% "scalactic" % "3.0.8",
   "org.scalatest" %% "scalatest" % "3.0.8" % "test"
