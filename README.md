@@ -14,12 +14,13 @@ Let's experiment stuff and see what happens.
 
 [comment]: <> (collection of links sorted alphabetically ascending)
 [history]: documentation/history.md
-[instagram-account]: https://www.instagram.com/the.sorted.chaos/
-[instagram-icon]: documentation/images/social-media/instagram-icon.png
 [lwjgl]: https://www.lwjgl.org/
 [mail-me]: mailto:the.sorted.chaos@gmail.com
 [scala]: https://www.scala-lang.org/
 [todo-list]: documentation/to-do-list.md
+[comment]: <> (social media)
+[instagram-account]: https://www.instagram.com/the.sorted.chaos/
+[instagram-icon]: documentation/images/social-media/instagram-icon.png
 [twitter-account]: https://twitter.com/sorted_chaos
 [twitter-icon]: documentation/images/social-media/twitter-icon.png
 [youtube-icon]: documentation/images/social-media/youtube-icon.png

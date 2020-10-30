@@ -2,8 +2,8 @@ package de.sorted.chaos.jump.graphic.render.texture
 
 import de.sorted.chaos.jump.graphic.render.component.{InitVao, VertexArrayObject, VertexBufferObject}
 import org.lwjgl.opengl.GL15.GL_STATIC_DRAW
-import org.sorted.chaos.wavefront.WavefrontReader
-import org.sorted.chaos.wavefront.mesh.Mesh
+import de.sorted.chaos.wavefront.WavefrontReader
+import de.sorted.chaos.wavefront.mesh.Mesh
 
 final case class TexturedEntity(vertexArrayObjectId: Int,
                                 textureId         : Int,
@@ -24,7 +24,7 @@ object TexturedEntity {
     )
   }
 
-  private def createVertexArrayObject(mesh: Mesh) = {
+  def createVertexArrayObject(mesh: Mesh): Int = {
     val vertexVboId  = VertexBufferObject.create(mesh.vertices, GL_STATIC_DRAW)
     val vertexTuple  = InitVao(vertexVboId, 3)
     val textureVboId = VertexBufferObject.create(mesh.textures, GL_STATIC_DRAW)

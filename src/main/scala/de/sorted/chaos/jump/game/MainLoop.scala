@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11.{GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, glClear}
 object MainLoop {
 
   def start(windowId: Long, configuration: Configuration): Unit = {
-    val cube = Entity.TexturedCube
+    val cube = Entity.TexturedBrix
     val projection = ProjectionMatrix.get(configuration)
     var rotation = 0.0f
 
@@ -25,7 +25,7 @@ object MainLoop {
 
       val view = ViewMatrix.matrix
       val pv = new Matrix4f(projection).mul(new Matrix4f(view))
-      val mvp =  new Matrix4f(pv).mul(new Matrix4f().translate(0.0f, 0.0f, 0.0f).rotateX(rotation).rotateY(rotation))
+      val mvp =  new Matrix4f(pv).mul(new Matrix4f().translate(0.0f, 0.0f, 0.0f))//.rotateX(rotation).rotateY(rotation))
 
       TextureRenderer.draw(mvp, cube)
 

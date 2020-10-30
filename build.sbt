@@ -15,7 +15,7 @@ libraryDependencies ++= Seq(
   // math
   "org.joml" % "joml" % "1.9.19",
   // utils
-  "org.sorted.chaos" %% "wavefront-reader" % "0.1.0-SNAPSHOT",
+  "com.github.thesortedchaos" %% "wavefront-reader" % "1.0.0",
   // testing
   "org.scalactic" %% "scalactic" % "3.0.8",
   "org.scalatest" %% "scalatest" % "3.0.8" % "test"
