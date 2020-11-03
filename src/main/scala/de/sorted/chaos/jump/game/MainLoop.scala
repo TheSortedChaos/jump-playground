@@ -1,7 +1,7 @@
 package de.sorted.chaos.jump.game
 
 import de.sorted.chaos.jump.configuration.Configuration
-import de.sorted.chaos.jump.graphic.Window
+import de.sorted.chaos.jump.graphic.{FramesPerSecond, Window}
 import de.sorted.chaos.jump.graphic.entity.Entity
 import de.sorted.chaos.jump.graphic.matrix.{ProjectionMatrix, ViewMatrix}
 import de.sorted.chaos.jump.graphic.render.animate.AnimationRenderer
@@ -20,6 +20,8 @@ object MainLoop {
     var rotation      = 0.0f
     var timestamp     = System.currentTimeMillis()
     var lastTimestamp = System.currentTimeMillis()
+
+    val fps = new FramesPerSecond()
 
     while (!glfwWindowShouldClose(windowId)) {
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -43,6 +45,7 @@ object MainLoop {
 
       glfwSwapBuffers(windowId)
       glfwPollEvents()
+      fps.process()
     }
 
     Window.destroy(windowId)

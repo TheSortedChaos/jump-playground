@@ -18,6 +18,7 @@ object AnimationRenderer {
     val step                = animatedEntity.currentStep
     val vertexArrayObjectId = animatedEntity.vertexArrayObjectIds(step)
     val size                = animatedEntity.size(step)
+    // TODO only one vertexArrayObjectId with data from .. to for animation step
 
     glBindVertexArray(vertexArrayObjectId)
     glUseProgram(ShaderProgramId)
