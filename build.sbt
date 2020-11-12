@@ -42,11 +42,8 @@ lazy val editor = project
     settings,
     libraryDependencies ++=
       loggingDependencies ++
-      testingDependencies ++
-      Seq(
-        dependencies.wavefrontReader,
-        dependencies.pureConfig
-      )
+      testingDependencies :+
+      dependencies.pureConfig
   )
   .dependsOn(shared)
 
@@ -108,8 +105,8 @@ lazy val testingDependencies = Seq(
 // ------------ [ SETTINGS ] ----------------
 
 lazy val settings =
-scalafmtSettings ++
-wartRemoverSettings
+  scalafmtSettings ++
+  wartRemoverSettings
 
 lazy val scalafmtSettings = Seq(
   scalafmtOnCompile := true,
