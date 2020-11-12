@@ -1,8 +1,8 @@
 package de.sorted.chaos.jump.game.graphic
 
-import de.sorted.chaos.jump.game.configuration.Configuration
+import de.sorted.chaos.jump.game.configuration.{Configuration, Graphic}
 import org.lwjgl.glfw.GLFW._
-import org.lwjgl.glfw.{ GLFW, GLFWErrorCallback }
+import org.lwjgl.glfw.{GLFW, GLFWErrorCallback}
 import org.lwjgl.opengl.GL.createCapabilities
 import org.lwjgl.opengl.GL11._
 import org.lwjgl.system.MemoryStack
@@ -11,12 +11,13 @@ import org.lwjgl.system.MemoryUtil.NULL
 object Window {
 
   def create(configuration: Configuration): Long = {
+    val graphicConfiguration = configuration.graphic
     initGlfw()
-    setProperties(configuration)
-    val windowId = createOpenGlWindow(configuration)
+    setProperties(graphicConfiguration)
+    val windowId = createOpenGlWindow(graphicConfiguration)
     setKeyCallback(windowId)
     centerWindow(windowId)
-    createOpenGlContext(windowId, configuration)
+    createOpenGlContext(windowId, graphicConfiguration)
 
     windowId
   }
@@ -28,7 +29,7 @@ object Window {
     }
   }
 
-  private def createOpenGlWindow(configuration: Configuration): Long = {
+  private def createOpenGlWindow(configuration: Graphic): Long = {
     val title    = configuration.screen.title
     val width    = configuration.screen.width
     val height   = configuration.screen.height
@@ -40,7 +41,7 @@ object Window {
     windowId
   }
 
-  private def setProperties(configuration: Configuration): Unit = {
+  private def setProperties(configuration: Graphic): Unit = {
     val majorVersion = configuration.opengl.majorVersion
     val minorVersion = configuration.opengl.minorVersion
     glfwWindowHint(GLFW_VISIBLE, GL_TRUE)
@@ -73,7 +74,7 @@ object Window {
     )
   }
 
-  private def createOpenGlContext(windowId: Long, configuration: Configuration): Unit = {
+  private def createOpenGlContext(windowId: Long, configuration: Graphic): Unit = {
     val vsync           = configuration.screen.vsync
     val wireframe       = configuration.opengl.wireframe
     val backfaceCulling = configuration.opengl.backfaceCulling

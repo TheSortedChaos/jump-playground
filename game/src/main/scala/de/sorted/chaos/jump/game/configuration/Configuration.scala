@@ -2,6 +2,16 @@ package de.sorted.chaos.jump.game.configuration
 
 import pureconfig.ConfigSource
 
+// Graphic
+
+final case class Graphic(screen: Screen, opengl: Opengl, camera: Camera) {
+  private[configuration] def prettyPrint: String =
+    s"""+ Graphic
+       |  ${screen.prettyPrint}
+       |  ${opengl.prettyPrint}
+       |  ${camera.prettyPrint}""".stripMargin
+}
+
 final case class Screen(title: String, width: Int, height: Int, fullscreen: Boolean, vsync: Boolean) {
   private[configuration] def prettyPrint: String =
     s"""  + Screen
@@ -27,13 +37,27 @@ final case class Camera(fieldOfView: Float, nearPlane: Float, farPlane: Float) {
        |      - Far Plane ............. $farPlane""".stripMargin
 }
 
-final case class Configuration(screen: Screen, opengl: Opengl, camera: Camera) {
+// Game
+
+final case class Game(playerMovement: PlayerMovement) {
+  private[configuration] def prettyPrint: String =
+    s"""+ Game
+       |  ${playerMovement.prettyPrint}""".stripMargin
+}
+
+final case class PlayerMovement(deltaX: Float, jumpHeight: Float) {
+  private[configuration] def prettyPrint: String =
+    s"""  + Player Movement
+       |      - delta x ............... $deltaX
+       |      - jump height ........... $jumpHeight""".stripMargin
+}
+
+final case class Configuration(graphic: Graphic, game: Game) {
   def prettyPrint: String =
     s"""
        |Configuration
-       |${screen.prettyPrint}
-       |${opengl.prettyPrint}
-       |${camera.prettyPrint}""".stripMargin
+       |${graphic.prettyPrint}
+       |${game.prettyPrint}""".stripMargin
 }
 
 object Configuration {

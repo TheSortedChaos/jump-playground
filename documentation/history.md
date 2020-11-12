@@ -2,6 +2,9 @@
 
 Here I try to document the history of that project...
 
+## 2020-11-12
+Implement controls for moving a textured cube.
+
 ## 2020-11-08
 Thinking about data structure for a level.
 Reorganize the project for a module approach.
