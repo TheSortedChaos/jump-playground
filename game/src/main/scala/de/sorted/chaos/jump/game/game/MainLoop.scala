@@ -1,22 +1,18 @@
 package de.sorted.chaos.jump.game.game
 
 import de.sorted.chaos.jump.game.configuration.Configuration
-import de.sorted.chaos.jump.game.game.pipeline.{ PhysicPipeline, RenderPipeline }
+import de.sorted.chaos.jump.game.game.pipeline.{ PhysicPipeline, PlayerState, RenderPipeline }
 import de.sorted.chaos.jump.game.graphic.{ FramesPerSecond, Window }
-import de.sorted.chaos.jump.game.input.PlayerAlignment
-import org.joml.Vector3f
 import org.lwjgl.glfw.GLFW.glfwWindowShouldClose
 
 import scala.annotation.tailrec
 
 final case class LoopState(currentTicks: Long, nextGameTick: Long, loops: Int)
 
-final case class LevelState(playerAlignment: PlayerAlignment)
-
 final case class GameState(
     windowId: Long,
     loopState: LoopState,
-    levelState: LevelState,
+    playerState: PlayerState,
     configuration: Configuration
 )
 
@@ -54,13 +50,7 @@ object MainLoop {
         nextGameTick = System.currentTimeMillis(),
         loops        = 0
       ),
-      levelState = LevelState(
-        playerAlignment = PlayerAlignment(
-          offset   = new Vector3f(),
-          rotation = new Vector3f(),
-          scale    = new Vector3f(1.0f, 1.0f, 1.0f)
-        )
-      ),
+      playerState   = PlayerState.init,
       configuration = configuration
     )
 

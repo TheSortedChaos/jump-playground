@@ -7,11 +7,12 @@ final case class GameConfiguration(playerMovement: PlayerMovement, gameLoopTimin
        |  ${gameLoopTiming.prettyPrint}""".stripMargin
 }
 
-final case class PlayerMovement(deltaX: Float, jumpHeight: Float) {
+final case class PlayerMovement(velocityX: Float, jumpHeight: Float, turnRotationStep: Float) {
   private[configuration] def prettyPrint: String =
     s"""  + Player Movement
-       |      - Delta X ............... $deltaX
-       |      - Jump Height ........... $jumpHeight""".stripMargin
+       |      - Velocity X ............ $velocityX
+       |      - Jump Height ........... $jumpHeight
+       |      - Turn Rotation Step .... $turnRotationStep""".stripMargin
 }
 
 final case class GameLoopTiming(ticksPerSecond: Int, maxFrameSkip: Int) {

@@ -1,7 +1,7 @@
 package de.sorted.chaos.jump.game.game.pipeline
 
-import de.sorted.chaos.jump.game.game.{ GameState, LevelState, LoopState }
-import de.sorted.chaos.jump.game.input.PlayerMovement
+import de.sorted.chaos.jump.game.game.{ GameState, LoopState }
+import de.sorted.chaos.jump.game.input.MovementInput
 
 import scala.annotation.tailrec
 
@@ -10,17 +10,14 @@ object PhysicPipeline {
   def updatePhysic(gameState: GameState): GameState = {
     @tailrec
     def helper(currentGameState: GameState): GameState = {
-      val windowId               = currentGameState.windowId
-      val gameConfig             = currentGameState.configuration.gameConfiguration
-      val currentTicks           = currentGameState.loopState.currentTicks
-      val nextGameTick           = currentGameState.loopState.currentTicks
-      val skipTicks              = currentGameState.configuration.gameConfiguration.gameLoopTiming.getSkipTicks
-      val maxFrameSkip           = currentGameState.configuration.gameConfiguration.gameLoopTiming.maxFrameSkip
-      val loops                  = currentGameState.loopState.loops
-      val currentPlayerAlignment = currentGameState.levelState.playerAlignment
-      val nextPlayerAlignment    = PlayerMovement.processInput(windowId, gameConfig, currentPlayerAlignment)
-      val newNextGameTick        = nextGameTick + skipTicks
-      val newLoops               = loops + 1
+      val windowId        = currentGameState.windowId
+      val currentTicks    = currentGameState.loopState.currentTicks
+      val nextGameTick    = currentGameState.loopState.nextGameTick
+      val skipTicks       = currentGameState.configuration.gameConfiguration.gameLoopTiming.getSkipTicks
+      val maxFrameSkip    = currentGameState.configuration.gameConfiguration.gameLoopTiming.maxFrameSkip
+      val loops           = currentGameState.loopState.loops
+      val newNextGameTick = nextGameTick + skipTicks
+      val newLoops        = loops + 1
 
       val newGameState = GameState(
         windowId = windowId,
@@ -29,8 +26,13 @@ object PhysicPipeline {
           nextGameTick = newNextGameTick,
           loops        = newLoops
         ),
-        levelState = LevelState(
-          playerAlignment = nextPlayerAlignment
+        playerState = PlayerState.modify(
+          previousPlayerState = currentGameState.playerState,
+          playerModifiers = MovementInput.processInput(
+            windowId,
+            currentGameState.configuration.gameConfiguration
+          ),
+          configuration = currentGameState.configuration
         ),
         configuration = currentGameState.configuration
       )
@@ -49,7 +51,7 @@ object PhysicPipeline {
         nextGameTick = gameState.loopState.nextGameTick,
         loops        = 0
       ),
-      levelState    = gameState.levelState,
+      playerState   = gameState.playerState,
       configuration = gameState.configuration
     )
 

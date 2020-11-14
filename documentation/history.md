@@ -15,6 +15,11 @@ In this process I introduced the first simple:
 * RenderPipeline
 * PhysicPipeline
 
+I also refactored the whole player movement system. 
+The movement system got split up into the `PlayerState` and `Modifiers` which can change the `PlayerState` (e.g. position, rotation).
+Also a simple physics system was introduced for the movement (s = v * t + s0)
+
+
 ## 2020-11-12
 Implement controls for moving a textured cube.
 
