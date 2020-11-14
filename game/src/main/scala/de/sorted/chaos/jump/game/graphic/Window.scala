@@ -1,8 +1,8 @@
 package de.sorted.chaos.jump.game.graphic
 
-import de.sorted.chaos.jump.game.configuration.{Configuration, Graphic}
+import de.sorted.chaos.jump.game.configuration.{ Configuration, GraphicConfiguration }
 import org.lwjgl.glfw.GLFW._
-import org.lwjgl.glfw.{GLFW, GLFWErrorCallback}
+import org.lwjgl.glfw.{ GLFW, GLFWErrorCallback }
 import org.lwjgl.opengl.GL.createCapabilities
 import org.lwjgl.opengl.GL11._
 import org.lwjgl.system.MemoryStack
@@ -11,7 +11,7 @@ import org.lwjgl.system.MemoryUtil.NULL
 object Window {
 
   def create(configuration: Configuration): Long = {
-    val graphicConfiguration = configuration.graphic
+    val graphicConfiguration = configuration.graphicConfiguration
     initGlfw()
     setProperties(graphicConfiguration)
     val windowId = createOpenGlWindow(graphicConfiguration)
@@ -29,7 +29,7 @@ object Window {
     }
   }
 
-  private def createOpenGlWindow(configuration: Graphic): Long = {
+  private def createOpenGlWindow(configuration: GraphicConfiguration): Long = {
     val title    = configuration.screen.title
     val width    = configuration.screen.width
     val height   = configuration.screen.height
@@ -41,7 +41,7 @@ object Window {
     windowId
   }
 
-  private def setProperties(configuration: Graphic): Unit = {
+  private def setProperties(configuration: GraphicConfiguration): Unit = {
     val majorVersion = configuration.opengl.majorVersion
     val minorVersion = configuration.opengl.minorVersion
     glfwWindowHint(GLFW_VISIBLE, GL_TRUE)
@@ -58,7 +58,7 @@ object Window {
       (windowId, key, scancode, action, mods) =>
         if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
           glfwSetWindowShouldClose(windowId, true)
-      }
+        }
     )
 
   private def centerWindow(windowId: Long): Unit = {
@@ -74,14 +74,14 @@ object Window {
     )
   }
 
-  private def createOpenGlContext(windowId: Long, configuration: Graphic): Unit = {
+  private def createOpenGlContext(windowId: Long, configuration: GraphicConfiguration): Unit = {
     val vsync           = configuration.screen.vsync
     val wireframe       = configuration.opengl.wireframe
     val backfaceCulling = configuration.opengl.backfaceCulling
 
     glfwMakeContextCurrent(windowId)
     createCapabilities()
-    glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
+    glClearColor(0.3f, 0.3f, 0.3f, 1.0f)
     glfwSwapInterval(if (vsync) 1 else 0)
     glfwShowWindow(windowId)
 

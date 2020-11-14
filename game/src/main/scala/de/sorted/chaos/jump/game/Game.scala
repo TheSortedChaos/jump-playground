@@ -19,7 +19,7 @@ object Game {
     val windowId = Window.create(configuration)
     Log.info("Create OpenGL window with id = '{}'.", windowId)
 
-    MainLoop.start(windowId, configuration)
+    MainLoop.loop(windowId, configuration)
 
     CleanUpService.cleanUp()
   }
