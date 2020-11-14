@@ -4,9 +4,11 @@
 At the moment this is a repository to play around with [Scala][scala] and OpenGL ([LWJGL][lwjgl]).
 Let's experiment stuff and see what happens.
 
+## History
+The history of the project can be found [here][history].
+
 ## Some Links
 * [TODO List][todo-list]
-* [History][history]
 
 ###### Social Media
 
