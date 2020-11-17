@@ -2,6 +2,11 @@
 
 Here I try to document the history of that project...
 
+## 2020-11-17
+I refactor some stuff and added the simplest jumping mechanic.
+It's not nice, because hammering the jump button resets the timer (looks awkward).
+I also think about using default metrics (like meter/second, meter, second) for configuration values and for calculating the physics.
+
 ## 2020-11-14
 I did a small research on "Game Loops" and found an interesting [page][game-loop].
 Thanks to [deWiTTERS][game-loop-twitter] for this description.
