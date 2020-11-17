@@ -28,11 +28,8 @@ object PhysicPipeline {
         ),
         playerState = PlayerState.modify(
           previousPlayerState = currentGameState.playerState,
-          playerModifiers = MovementInput.processInput(
-            windowId,
-            currentGameState.configuration.gameConfiguration
-          ),
-          configuration = currentGameState.configuration
+          playerModifiers     = MovementInput.processInput(windowId),
+          configuration       = currentGameState.configuration
         ),
         configuration = currentGameState.configuration
       )

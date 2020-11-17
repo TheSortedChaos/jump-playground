@@ -11,7 +11,7 @@ object Camera {
       8.0f,
       18.0f,
       playerState.position.x,
-      playerState.position.y,
+      0.0f,
       playerState.position.z,
       0.0f,
       1.0f,

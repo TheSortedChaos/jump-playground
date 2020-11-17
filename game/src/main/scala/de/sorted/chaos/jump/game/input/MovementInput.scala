@@ -1,28 +1,57 @@
 package de.sorted.chaos.jump.game.input
 
-import de.sorted.chaos.jump.game.configuration.GameConfiguration
-import org.joml.Vector3f
 import org.lwjgl.glfw.GLFW
 
 object MovementInput {
 
-  def processInput(windowId: Long, configuration: GameConfiguration): PlayerModification = {
-    val velocityX       = configuration.playerMovement.velocityX
-    val playerModifiers = PlayerModification.init
-    var newVelocity     = new Vector3f(0.0f, 0.0f, 0.0f)
+  var LastJump = 0L
 
-    if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_A) == GLFW.GLFW_PRESS &&
-        GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_D) != GLFW.GLFW_PRESS) {
-      newVelocity = newVelocity.add(-velocityX, 0.0f, 0.0f)
-    } else if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_D) == GLFW.GLFW_PRESS &&
-               GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_A) != GLFW.GLFW_PRESS) {
-      newVelocity = newVelocity.add(velocityX, 0.0f, 0.0f)
-    } else if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_W) == GLFW.GLFW_PRESS) {
-      // rotation.x = 20.0f
-    } else if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_S) == GLFW.GLFW_PRESS) {
-      // nothing
+  def processInput(windowId: Long): PlayerModificationState =
+    (pressLeft(windowId), pressRight(windowId), pressJump(windowId)) match {
+      case (true, false, false) =>
+        PlayerModificationState(
+          direction = Direction.LEFT,
+          velocity  = Velocity.WALK,
+          jump      = false,
+          jumpStart = LastJump
+        )
+      case (false, true, false) =>
+        PlayerModificationState(
+          direction = Direction.RIGHT,
+          velocity  = Velocity.WALK,
+          jump      = false,
+          jumpStart = LastJump
+        )
+      case (false, false, true) =>
+        LastJump = System.currentTimeMillis()
+        PlayerModificationState(
+          direction = Direction.TO_SCREEN,
+          velocity  = Velocity.STAND,
+          jump      = true,
+          jumpStart = LastJump
+        )
+      case (true, false, true) =>
+        LastJump = System.currentTimeMillis()
+        PlayerModificationState(
+          direction = Direction.LEFT,
+          velocity  = Velocity.WALK,
+          jump      = true,
+          jumpStart = LastJump
+        )
+      case (false, true, true) =>
+        LastJump = System.currentTimeMillis()
+        PlayerModificationState(
+          direction = Direction.RIGHT,
+          velocity  = Velocity.WALK,
+          jump      = true,
+          jumpStart = LastJump
+        )
+      case _ => PlayerModificationState.init(LastJump)
     }
 
-    playerModifiers.setVelocity(newVelocity)
-  }
+  private def pressLeft(windowId: Long) = GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_A) == GLFW.GLFW_PRESS
+
+  private def pressRight(windowId: Long) = GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_D) == GLFW.GLFW_PRESS
+
+  private def pressJump(windowId: Long) = GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_SPACE) == GLFW.GLFW_PRESS
 }

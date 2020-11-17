@@ -4,7 +4,6 @@ import de.sorted.chaos.jump.game.game.GameState
 import de.sorted.chaos.jump.game.graphic.entity.Entity
 import de.sorted.chaos.jump.game.graphic.matrix.MatrixStack
 import de.sorted.chaos.jump.game.graphic.render.texture.{ TextureRenderer, TexturedEntity }
-import de.sorted.chaos.jump.game.input.PlayerModification
 import org.joml.Matrix4f
 import org.lwjgl.glfw.GLFW.{ glfwPollEvents, glfwSwapBuffers }
 import org.lwjgl.opengl.GL11.{ glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT }
@@ -18,7 +17,7 @@ object RenderPipeline {
     val windowId             = gameState.windowId
     val interpolation        = getInterpolation(gameState) // interpolation between two render states
     val configuration        = gameState.configuration
-    val playerState      = gameState.playerState
+    val playerState          = gameState.playerState
     val projectionViewMatrix = MatrixStack.getProjectionViewMatrix(configuration, playerState)
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
