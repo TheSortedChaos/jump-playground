@@ -3,9 +3,8 @@ package de.sorted.chaos.jump.game.game.pipeline
 import de.sorted.chaos.jump.game.configuration.Configuration
 import de.sorted.chaos.jump.game.input.{ Direction, PlayerModificationState, Velocity }
 import org.joml.{ Matrix4f, Vector3f }
-import org.slf4j.LoggerFactory
 
-final case class PlayerState(timestamp: Long, jumpStart: Long, position: Vector3f, rotation: Vector3f, scale: Vector3f) {
+final case class PlayerState(timestamp: Long, jumpTimer: JumpTimer, position: Vector3f, rotation: Vector3f, scale: Vector3f) {
 
   def getModelMatrix: Matrix4f =
     new Matrix4f()
@@ -18,11 +17,9 @@ final case class PlayerState(timestamp: Long, jumpStart: Long, position: Vector3
 
 object PlayerState {
 
-  private val Log = LoggerFactory.getLogger(this.getClass)
-
   def init: PlayerState = PlayerState(
     timestamp = System.currentTimeMillis(),
-    jumpStart = 0L,
+    jumpTimer = JumpTimer.init,
     position  = new Vector3f(0.0f, 0.0f, 0.0f),
     rotation  = new Vector3f(0.0f, 0.0f, 0.0f),
     scale     = new Vector3f(1.0f, 1.0f, 1.0f)
@@ -39,11 +36,11 @@ object PlayerState {
     val deltaTime = now - timestamp
 
     val newYRotation = (playerModifiers.direction, previousPlayerState.rotation.y) match {
-      case (Direction.LEFT, rotY) if rotY > -90.0f && rotY <= 90.0f => turnLeft(previousPlayerState, configuration)
+      case (Direction.LEFT, rotY) if rotY > -90.0f && rotY <= 90.0f  => turnLeft(previousPlayerState, configuration)
       case (Direction.RIGHT, rotY) if rotY < 90.0f && rotY >= -90.0f => turnRight(previousPlayerState, configuration)
-      case (Direction.TO_SCREEN, rotY) if rotY < 0.0f              => turnRight(previousPlayerState, configuration)
-      case (Direction.TO_SCREEN, rotY) if rotY > 0.0f              => turnLeft(previousPlayerState, configuration)
-      case _                                                       => previousPlayerState.rotation.y
+      case (Direction.TO_SCREEN, rotY) if rotY < 0.0f                => turnRight(previousPlayerState, configuration)
+      case (Direction.TO_SCREEN, rotY) if rotY > 0.0f                => turnLeft(previousPlayerState, configuration)
+      case _                                                         => previousPlayerState.rotation.y
     }
 
     val newXPosition = (newYRotation, playerModifiers.direction, playerModifiers.velocity) match {
@@ -52,25 +49,31 @@ object PlayerState {
       case _                                       => previousPlayerState.position.x
     }
 
-  //  val jumpStart = if (playerModifiers.jump) System.currentTimeMillis() else previousPlayerState.jumpStart
-  //  Log.info("jump: {}", playerModifiers.jumpStart)
-    val ground        = 0.0f
-    val inAir         = previousPlayerState.position.y > 0.0
-    val deltaJumpTime = System.currentTimeMillis() - playerModifiers.jumpStart
-    val newYPosition = (ground, inAir, playerModifiers.jump) match {
-      case (0.0f, false, true)  => jumpUp(previousPlayerState, deltaJumpTime, configuration)
-      case (0.0f, true, true)   => jumpUp(previousPlayerState, deltaJumpTime, configuration)
-      case (0.0f, true, false)  => jumpUp(previousPlayerState, deltaJumpTime, configuration)
-      case (0.0f, false, false) => 0.0f
-      case _                    => previousPlayerState.position.y
+    val newJumpTimer = if (playerModifiers.jump && previousPlayerState.jumpTimer.jumpAvailable) {
+      JumpTimer(
+        timestamp          = System.currentTimeMillis(),
+        jumpStartTimestamp = System.currentTimeMillis(),
+        jumpStartY         = previousPlayerState.position.y,
+        jumpAvailable      = false
+      )
+    } else if (previousPlayerState.position.y < 0.001f) {
+      JumpTimer.init
+    } else {
+      previousPlayerState.jumpTimer
+    }
+
+    val newYPosition = if (!newJumpTimer.jumpAvailable) {
+      executeJump(newJumpTimer, configuration)
+    } else {
+      0.0f
     }
 
     PlayerState(
       timestamp = now,
-      0L,
-      position  = new Vector3f(newXPosition, newYPosition, previousPlayerState.position.z),
-      rotation  = new Vector3f(previousPlayerState.rotation.x, newYRotation, previousPlayerState.rotation.z),
-      scale     = previousPlayerState.scale
+      newJumpTimer,
+      position = new Vector3f(newXPosition, newYPosition, previousPlayerState.position.z),
+      rotation = new Vector3f(previousPlayerState.rotation.x, newYRotation, previousPlayerState.rotation.z),
+      scale    = previousPlayerState.scale
     )
   }
 
@@ -102,26 +105,12 @@ object PlayerState {
     rotY + rotationStep
   }
 
-  private def jumpUp(previousPlayerState: PlayerState, deltaTime: Long, configuration: Configuration) = {
+  private def executeJump(jumpTimer: JumpTimer, configuration: Configuration) = {
     val velocityY = configuration.gameConfiguration.playerMovement.velocityY
     val gravity   = configuration.gameConfiguration.playerMovement.gravity
-//    val y = previousPlayerState.position.y
+    val y         = jumpTimer.jumpStartY
+    val deltaTime = System.currentTimeMillis() - jumpTimer.jumpStartTimestamp
 
-    val newY = velocityY * deltaTime - (gravity / 2.0f * deltaTime * deltaTime) +0.001f
-    val a = velocityY * deltaTime
-    val b = (gravity / 2.0f * deltaTime * deltaTime) +0.001f
-    Log.info(
-      "{} = {} * {} - ({} / 2.0f * {} * {})   ---- {} - {}",
-      newY,
-      velocityY,
-      deltaTime,
-      gravity,
-      deltaTime,
-      deltaTime,
-      a,
-      b
-    )
-
-    newY
+    velocityY * deltaTime - (gravity / 2.0f * deltaTime * deltaTime) + 0.001f + y
   }
 }

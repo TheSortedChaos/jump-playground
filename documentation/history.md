@@ -2,6 +2,10 @@
 
 Here I try to document the history of that project...
 
+## 2020-11-18
+I refactored the jump mechanics.
+Now a jumpTimer is used and now it works slightly better than before.
+
 ## 2020-11-17
 I refactor some stuff and added the simplest jumping mechanic.
 It's not nice, because hammering the jump button resets the timer (looks awkward).

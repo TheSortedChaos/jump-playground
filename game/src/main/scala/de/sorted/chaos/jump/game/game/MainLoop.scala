@@ -38,8 +38,8 @@ object MainLoop {
       if (glfwWindowShouldClose(windowId)) {
         nextGameState
       } else {
+        Fps.process()
         executeGameLoop(nextGameState)
-        // Fps.process()
       }
     }
 
