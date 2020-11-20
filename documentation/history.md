@@ -2,6 +2,10 @@
 
 Here I try to document the history of that project...
 
+## 2020-11-19
+I played around with some BoundingBoxes to limit the player movement.
+Well at the moment it doesn't work like expected.
+
 ## 2020-11-18
 I refactored the jump mechanics.
 Now a jumpTimer is used and now it works slightly better than before.

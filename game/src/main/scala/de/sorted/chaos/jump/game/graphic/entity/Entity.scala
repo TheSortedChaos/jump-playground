@@ -9,6 +9,8 @@ object Entity {
 
   val TexturedBrix: TexturedEntity = TexturedEntity.createFrom("/entity/brix/brix.obj", Texture.BrixTexture)
 
+  val TexturedBlock: TexturedEntity = TexturedEntity.createFrom("/entity/cube/cube.obj", Texture.LowPolyTexture)
+
   val walkingHero: AnimatedEntity = AnimatedEntity.createFrom(
     List(
       "/entity/hero/hero3_000001.obj",

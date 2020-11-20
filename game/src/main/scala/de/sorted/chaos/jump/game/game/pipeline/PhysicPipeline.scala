@@ -27,10 +27,12 @@ object PhysicPipeline {
           loops        = newLoops
         ),
         playerState = PlayerState.modify(
-          previousPlayerState = currentGameState.playerState,
+          previousPlayerState = currentGameState.playerState, // Todo gameState as parameter
+          level               = currentGameState.level,
           playerModifiers     = MovementInput.processInput(windowId),
           configuration       = currentGameState.configuration
         ),
+        level         = currentGameState.level,
         configuration = currentGameState.configuration
       )
 
@@ -49,6 +51,7 @@ object PhysicPipeline {
         loops        = 0
       ),
       playerState   = gameState.playerState,
+      level         = gameState.level,
       configuration = gameState.configuration
     )
 

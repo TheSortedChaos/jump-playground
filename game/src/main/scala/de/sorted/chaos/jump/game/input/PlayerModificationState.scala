@@ -13,9 +13,9 @@ object Velocity extends Enumeration {
   val WALK, RUN, STAND = Value
 }
 
-final case class PlayerModificationState(direction: Direction, velocity: Velocity, jump: Boolean, jumpStart: Long)
+final case class PlayerModificationState(direction: Direction, velocity: Velocity, jump: Boolean)
 
 object PlayerModificationState {
-  def init(lastJump: Long): PlayerModificationState =
-    PlayerModificationState(direction = TO_SCREEN, velocity = STAND, jump = false, lastJump)
+  def idle: PlayerModificationState =
+    PlayerModificationState(direction = TO_SCREEN, velocity = STAND, jump = false)
 }

@@ -1,8 +1,9 @@
 package de.sorted.chaos.jump.game.game
 
 import de.sorted.chaos.jump.game.configuration.Configuration
-import de.sorted.chaos.jump.game.game.pipeline.{ PhysicPipeline, PlayerState, RenderPipeline }
-import de.sorted.chaos.jump.game.graphic.{ FramesPerSecond, Window }
+import de.sorted.chaos.jump.game.game.entity.MovableEntity
+import de.sorted.chaos.jump.game.game.pipeline.{Level, PhysicPipeline, PlayerState, RenderPipeline}
+import de.sorted.chaos.jump.game.graphic.{FramesPerSecond, Window}
 import org.lwjgl.glfw.GLFW.glfwWindowShouldClose
 
 import scala.annotation.tailrec
@@ -10,10 +11,11 @@ import scala.annotation.tailrec
 final case class LoopState(currentTicks: Long, nextGameTick: Long, loops: Int)
 
 final case class GameState(
-    windowId: Long,
-    loopState: LoopState,
-    playerState: PlayerState,
-    configuration: Configuration
+  windowId: Long,
+  loopState: LoopState,
+  playerState: MovableEntity,
+  level: Level,
+  configuration: Configuration
 )
 
 object MainLoop {
@@ -50,7 +52,8 @@ object MainLoop {
         nextGameTick = System.currentTimeMillis(),
         loops        = 0
       ),
-      playerState   = PlayerState.init,
+      playerState   = MovableEntity.init,
+      level         = Level.init,
       configuration = configuration
     )
 

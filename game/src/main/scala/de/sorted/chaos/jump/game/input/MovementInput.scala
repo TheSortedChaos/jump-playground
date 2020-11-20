@@ -4,49 +4,39 @@ import org.lwjgl.glfw.GLFW
 
 object MovementInput {
 
-  var LastJump = 0L
-
   def processInput(windowId: Long): PlayerModificationState =
     (pressLeft(windowId), pressRight(windowId), pressJump(windowId)) match {
       case (true, false, false) =>
         PlayerModificationState(
           direction = Direction.LEFT,
           velocity  = Velocity.WALK,
-          jump      = false,
-          jumpStart = LastJump
+          jump      = false
         )
       case (false, true, false) =>
         PlayerModificationState(
           direction = Direction.RIGHT,
           velocity  = Velocity.WALK,
-          jump      = false,
-          jumpStart = LastJump
+          jump      = false
         )
       case (false, false, true) =>
-        LastJump = System.currentTimeMillis()
         PlayerModificationState(
           direction = Direction.TO_SCREEN,
           velocity  = Velocity.STAND,
-          jump      = true,
-          jumpStart = LastJump
+          jump      = true
         )
       case (true, false, true) =>
-        LastJump = System.currentTimeMillis()
         PlayerModificationState(
           direction = Direction.LEFT,
           velocity  = Velocity.WALK,
-          jump      = true,
-          jumpStart = LastJump
+          jump      = true
         )
       case (false, true, true) =>
-        LastJump = System.currentTimeMillis()
         PlayerModificationState(
           direction = Direction.RIGHT,
           velocity  = Velocity.WALK,
-          jump      = true,
-          jumpStart = LastJump
+          jump      = true
         )
-      case _ => PlayerModificationState.init(LastJump)
+      case _ => PlayerModificationState.idle
     }
 
   private def pressLeft(windowId: Long) = GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_A) == GLFW.GLFW_PRESS

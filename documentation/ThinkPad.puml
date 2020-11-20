@@ -1,0 +1,22 @@
+@startuml
+
+start
+
+partition MainLoop {
+  repeat
+    partition Physic-Pipeline {
+      :get User input;
+      :check Input with Level (Boundaries);
+      :apply Physics/User input;
+    }
+    partition Render-Pipeline {
+      :draw Level;
+      :draw Player;
+    }
+
+  repeat while (exit?)
+}
+
+stop
+
+@enduml
