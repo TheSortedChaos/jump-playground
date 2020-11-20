@@ -16,7 +16,7 @@ object VerticalMovementProcessor {
       case (false, distance, _) if distance > Delta  => falling(entity, level.gravityForFall)
       case (true, _, distance) if distance <= Delta  => entity.startFallTiming
       case (true, _, distance) if distance > Delta   => jumping(entity, level.gravityForJump, jumpVelocity)
-      case _                                         => entity
+      case _                                         => entity.resetDefaultTimer
     }
   }
 

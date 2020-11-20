@@ -20,6 +20,13 @@ final case class MovableEntity(alignment: Alignment, timings: Timings, boundingB
       timings     = this.timings.reset().startFallTimer(this.alignment.position.y),
       boundingBox = this.boundingBox
     )
+
+  def resetDefaultTimer: MovableEntity =
+    MovableEntity(
+      alignment   = this.alignment,
+      timings     = this.timings.updateDefaultTimer(),
+      boundingBox = this.boundingBox
+    )
 }
 
 object MovableEntity {
