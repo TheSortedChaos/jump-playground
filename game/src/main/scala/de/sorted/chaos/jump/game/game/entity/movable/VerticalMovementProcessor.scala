@@ -15,7 +15,7 @@ object VerticalMovementProcessor {
       case (false, distance, _) if distance <= Delta => entity.resetTimings
       case (false, distance, _) if distance > Delta  => falling(entity, level.gravityForFall)
       case (true, _, distance) if distance <= Delta  => entity.startFallTiming
-      case (true, _, distance) if distance > Delta => jumping(entity, level.gravityForJump, jumpVelocity)
+      case (true, _, distance) if distance > Delta   => jumping(entity, level.gravityForJump, jumpVelocity)
       case _                                         => entity
     }
   }
@@ -34,7 +34,7 @@ object VerticalMovementProcessor {
   private def jumping(entity: MovableEntity, jumpGravity: Float, velocity: Float) = {
     val (deltaTime, newTiming) = getJumpDeltaTime(entity)
     val timeToMaxHeight        = velocity / jumpGravity * 1000 // in ms
-    println(s"timeToMaxHeight = $timeToMaxHeight - deltaTime = $deltaTime")
+
     if (deltaTime > timeToMaxHeight) {
       entity.startFallTiming
     } else {

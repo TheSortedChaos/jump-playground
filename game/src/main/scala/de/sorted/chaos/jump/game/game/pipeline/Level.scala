@@ -19,7 +19,7 @@ object Level {
         new AABBf(-9.0f, -1.05f, -1.0f, -7.0f, 0.95f, 1.0f),
         new AABBf(7.0f, -1.05f, -1.0f, 9.0f, 0.95f, 1.0f)
       ),
-      gravityForJump = 9.81f,
-      gravityForFall = 20.5f
+      gravityForJump = 18.0f,
+      gravityForFall = 35.0f
     )
 }
