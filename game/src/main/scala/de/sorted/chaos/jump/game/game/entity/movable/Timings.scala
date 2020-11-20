@@ -1,4 +1,4 @@
-package de.sorted.chaos.jump.game.game.entity
+package de.sorted.chaos.jump.game.game.entity.movable
 
 final case class AirTimer(startTimestamp: Long, startY: Float)
 

@@ -105,8 +105,8 @@ lazy val testingDependencies = Seq(
 // ------------ [ SETTINGS ] ----------------
 
 lazy val settings =
-  scalafmtSettings ++
-  wartRemoverSettings
+scalafmtSettings ++
+wartRemoverSettings
 
 lazy val scalafmtSettings = Seq(
   scalafmtOnCompile := true,

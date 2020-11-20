@@ -1,8 +1,8 @@
 package de.sorted.chaos.jump.game.game
 
 import de.sorted.chaos.jump.game.configuration.Configuration
-import de.sorted.chaos.jump.game.game.entity.MovableEntity
-import de.sorted.chaos.jump.game.game.pipeline.{Level, PhysicPipeline, PlayerState, RenderPipeline}
+import de.sorted.chaos.jump.game.game.entity.movable.MovableEntity
+import de.sorted.chaos.jump.game.game.pipeline.{Level, PhysicPipeline, PlayerStateProcessor, RenderPipeline}
 import de.sorted.chaos.jump.game.graphic.{FramesPerSecond, Window}
 import org.lwjgl.glfw.GLFW.glfwWindowShouldClose
 

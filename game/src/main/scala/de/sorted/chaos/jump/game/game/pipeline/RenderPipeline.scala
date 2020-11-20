@@ -1,7 +1,7 @@
 package de.sorted.chaos.jump.game.game.pipeline
 
 import de.sorted.chaos.jump.game.game.GameState
-import de.sorted.chaos.jump.game.game.entity.MovableEntity
+import de.sorted.chaos.jump.game.game.entity.movable.MovableEntity
 import de.sorted.chaos.jump.game.graphic.entity.Entity
 import de.sorted.chaos.jump.game.graphic.matrix.MatrixStack
 import de.sorted.chaos.jump.game.graphic.render.texture.{TextureRenderer, TexturedEntity}

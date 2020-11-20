@@ -26,7 +26,7 @@ object PhysicPipeline {
           nextGameTick = newNextGameTick,
           loops        = newLoops
         ),
-        playerState = PlayerState.modify(
+        playerState = PlayerStateProcessor.nextPlayerSate(
           previousPlayerState = currentGameState.playerState, // Todo gameState as parameter
           level               = currentGameState.level,
           playerModifiers     = MovementInput.processInput(windowId),

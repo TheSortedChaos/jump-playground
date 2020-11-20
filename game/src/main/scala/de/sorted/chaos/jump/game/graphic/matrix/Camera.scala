@@ -1,6 +1,6 @@
 package de.sorted.chaos.jump.game.graphic.matrix
 
-import de.sorted.chaos.jump.game.game.entity.MovableEntity
+import de.sorted.chaos.jump.game.game.entity.movable.MovableEntity
 import org.joml.Matrix4f
 
 object Camera {
