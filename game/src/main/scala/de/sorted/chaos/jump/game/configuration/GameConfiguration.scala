@@ -7,13 +7,11 @@ final case class GameConfiguration(playerMovement: PlayerMovement, gameLoopTimin
        |  ${gameLoopTiming.prettyPrint}""".stripMargin
 }
 
-final case class PlayerMovement(velocityX: Float, velocityY: Float, turnRotationStep: Float, gravity: Float) {
+final case class PlayerMovement(velocityX: Float, velocityY: Float) {
   private[configuration] def prettyPrint: String =
     s"""  + Player Movement
        |      - Velocity X ............ $velocityX
-       |      - Velocity Y ............ $velocityY
-       |      - Turn Rotation Step .... $turnRotationStep
-       |      - Gravity ............... $gravity""".stripMargin
+       |      - Velocity Y ............ $velocityY""".stripMargin
 }
 
 final case class GameLoopTiming(ticksPerSecond: Int, maxFrameSkip: Int) {
