@@ -18,16 +18,23 @@ object PlayerStateProcessor {
       configuration: Configuration
   ): MovableEntity = {
 
-    val velocity  = configuration.gameConfiguration.playerMovement.velocityX
+    val velocityX = configuration.gameConfiguration.playerMovement.velocityX
     val velocityY = configuration.gameConfiguration.playerMovement.velocityY
 
+
     val horizontal = (playerModifiers.direction, playerModifiers.velocity) match {
-      case (Direction.LEFT, Velocity.WALK)  => HorizontalMovementProcessor.next(previousPlayerState, level, -velocity)
-      case (Direction.RIGHT, Velocity.WALK) => HorizontalMovementProcessor.next(previousPlayerState, level, velocity)
+      case (Direction.LEFT, Velocity.WALK)  => HorizontalMovementProcessor.next(previousPlayerState, level, -velocityX)
+      case (Direction.RIGHT, Velocity.WALK) => HorizontalMovementProcessor.next(previousPlayerState, level, velocityX)
       case _                                => IdleMovementProcesor.next(previousPlayerState)
     }
 
-    val vertical = VerticalMovementProcessor.next(horizontal, level, velocityY, playerModifiers.jump)
+    val vertical = VerticalMovementProcessor.next(
+      horizontal,
+      level,
+      velocityY,
+      playerModifiers.jump
+    )
+
 
     vertical
   }

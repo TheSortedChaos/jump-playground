@@ -7,7 +7,7 @@ object Camera {
 
   private[matrix] def getViewMatrix(player: MovableEntity) =
     new Matrix4f().setLookAt(
-      0.0f,
+      player.alignment.position.x,
       8.0f,
       30.0f,
       player.alignment.position.x,

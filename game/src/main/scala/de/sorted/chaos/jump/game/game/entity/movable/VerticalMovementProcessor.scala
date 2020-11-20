@@ -7,8 +7,8 @@ object VerticalMovementProcessor {
   private val Delta = 0.1f
 
   def next(entity: MovableEntity, level: Level, jumpVelocity: Float, isJumping: Boolean): MovableEntity = {
-    val distanceToBottom = MoveSensor.shootRayToGround(entity, level)
-    val distanceToUp     = MoveSensor.shootRayToSky(entity, level)
+    val distanceToBottom = DistanceSensor.shootRayToGround(entity, level)
+    val distanceToUp     = DistanceSensor.shootRayToSky(entity, level)
     val jumpEntity       = maybeStartJump(entity, isJumping, distanceToBottom)
 
     (jumpEntity.timings.jumpTimer.isDefined, distanceToBottom, distanceToUp) match {

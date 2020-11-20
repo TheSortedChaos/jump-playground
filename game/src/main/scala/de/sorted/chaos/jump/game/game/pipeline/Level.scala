@@ -4,7 +4,7 @@ import org.joml.{ AABBf, Intersectionf }
 
 final case class Level(boundingBoxes: Vector[AABBf], gravityForJump: Float, gravityForFall: Float) {
 
-  def entityIntersectWithBoundingBox(entityBoundingBox: AABBf): Boolean =
+  def entityIntersectWithLevelBoundingBox(entityBoundingBox: AABBf): Boolean =
     this.boundingBoxes
       .map(box => Intersectionf.testAabAab(box, entityBoundingBox))
       .reduce((x, y) => x || y)

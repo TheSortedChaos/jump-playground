@@ -23,7 +23,7 @@ final case class Timings(now: Long, fallTimer: Option[AirTimer], jumpTimer: Opti
     val now           = System.currentTimeMillis()
     val fallDeltaTIme = if (this.fallTimer.isEmpty) 0L else now - this.fallTimer.get.startTimestamp
     val newTiming = Timings(
-      now       = now,
+      now       = this.now,
       fallTimer = this.fallTimer,
       jumpTimer = this.jumpTimer
     )
@@ -35,7 +35,7 @@ final case class Timings(now: Long, fallTimer: Option[AirTimer], jumpTimer: Opti
     val now           = System.currentTimeMillis()
     val jumpDeltaTime = if (this.jumpTimer.isEmpty) 0L else now - this.jumpTimer.get.startTimestamp
     val newTiming = Timings(
-      now       = now,
+      now       = this.now,
       fallTimer = this.fallTimer,
       jumpTimer = this.jumpTimer
     )
@@ -45,7 +45,7 @@ final case class Timings(now: Long, fallTimer: Option[AirTimer], jumpTimer: Opti
 
   private[entity] def startFallTimer(startY: Float) =
     Timings(
-      now = System.currentTimeMillis(),
+      now = this.now,
       fallTimer = Some(
         AirTimer(
           startTimestamp = System.currentTimeMillis(),
@@ -57,7 +57,7 @@ final case class Timings(now: Long, fallTimer: Option[AirTimer], jumpTimer: Opti
 
   def startJumpTimer(startY: Float): Timings =
     Timings(
-      now       = System.currentTimeMillis(),
+      now       = this.now,
       fallTimer = None,
       jumpTimer = Some(
         AirTimer(
@@ -69,7 +69,7 @@ final case class Timings(now: Long, fallTimer: Option[AirTimer], jumpTimer: Opti
 
   private[entity] def reset() =
     Timings(
-      now       = System.currentTimeMillis(),
+      now       = this.now,
       fallTimer = None,
       jumpTimer = None
     )

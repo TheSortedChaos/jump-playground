@@ -11,7 +11,7 @@ object HorizontalMovementProcessor {
     val newAlignment = updatePositionX(entity, horizontalVelocity, deltaTime)
     val boundingBox = HorizontalMovementProcessor.getBoundingBox(newAlignment, entity.boundingBox)
 
-    if (level.entityIntersectWithBoundingBox(boundingBox)) {
+    if (level.entityIntersectWithLevelBoundingBox(boundingBox)) {
       MovableEntity(
         alignment   = entity.alignment,
         timings     = newTiming,
