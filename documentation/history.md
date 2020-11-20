@@ -2,6 +2,14 @@
 
 Here I try to document the history of that project...
 
+## 2020-11-20
+I refactor the whole movement mechanics.
+I introduce rays for distance measurements for falling and jumping.
+Now it works like it should, but two little things are bothering me:
+* Sometimes the player breaks through a bounding box (especially at the start)
+* jumping is a tiny bit imprecise.
+It feels like jumping is not on point (hitting the button vs seeing the effect) / too slow.
+
 ## 2020-11-19
 I played around with some BoundingBoxes to limit the player movement.
 Well at the moment it doesn't work like expected.

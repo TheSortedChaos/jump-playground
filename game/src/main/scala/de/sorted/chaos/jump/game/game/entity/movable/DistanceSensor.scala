@@ -5,47 +5,78 @@ import org.joml.{ AABBf, Rayf, Vector3f }
 
 object DistanceSensor {
 
+  // TODO clean up
+
   private val RayLength = 200.0f
   private val Delta     = 0.1f
 
   def shootRayToSky(entity: MovableEntity, level: Level): Float = {
     val ray = createRayToSky(entity)
 
-    getDistanceToNearestObstacle(ray, entity, level)
+    getDistanceToNearestObstacleSky(ray, entity, level)
   }
 
   def shootRayToGround(entity: MovableEntity, level: Level): Float = {
     val ray = createRayToGround(entity)
 
-    getDistanceToNearestObstacle(ray, entity, level)
+    getDistanceToNearestObstacleGround(ray, entity, level)
   }
 
-  private def getDistanceToNearestObstacle(rays: Vector[Rayf], entity: MovableEntity, level: Level) =
+  private def getDistanceToNearestObstacleGround(rays: Vector[Rayf], entity: MovableEntity, level: Level) =
     level.boundingBoxes
       .flatMap(box => rays.map(ray => (box, box.intersectsRay(ray))))
       .filter(tuple => tuple._2)
-      .map(tuple => getDistance(entity, tuple._1))
+      .map(tuple => getDistanceForGround(entity, tuple._1))
       .minOption
       .getOrElse(RayLength)
 
-  private def getDistance(entity: MovableEntity, other: AABBf) = {
-    val start = rayStart(entity)
-    val end   = rayEnd(entity, other)
+  private def getDistanceToNearestObstacleSky(rays: Vector[Rayf], entity: MovableEntity, level: Level) =
+    level.boundingBoxes
+      .flatMap(box => rays.map(ray => (box, box.intersectsRay(ray))))
+      .filter(tuple => tuple._2)
+      .map(tuple => getDistanceForSky(entity, tuple._1))
+      .minOption
+      .getOrElse(RayLength)
+
+  private def getDistanceForGround(entity: MovableEntity, other: AABBf) = {
+    val start = rayStartForGround(entity)
+    val end   = rayEndForGround(entity, other)
 
     start.distance(end)
   }
 
-  private def rayEnd(entity: MovableEntity, boundingBox: AABBf) =
+  private def getDistanceForSky(entity: MovableEntity, other: AABBf) = {
+    val start = rayStartForSky(entity)
+    val end   = rayEndForSky(entity, other)
+
+    start.distance(end)
+  }
+
+  private def rayEndForGround(entity: MovableEntity, boundingBox: AABBf) =
     new Vector3f(
       entity.alignment.position.x,
       boundingBox.maxY,
       entity.alignment.position.z
     )
 
-  private def rayStart(entity: MovableEntity) =
+  private def rayEndForSky(entity: MovableEntity, boundingBox: AABBf) =
+    new Vector3f(
+      entity.alignment.position.x,
+      boundingBox.minY,
+      entity.alignment.position.z
+    )
+
+  private def rayStartForGround(entity: MovableEntity) =
     new Vector3f(
       entity.alignment.position.x,
       entity.alignment.position.y - entity.boundingBox.yRange,
+      entity.alignment.position.z
+    )
+
+  private def rayStartForSky(entity: MovableEntity) =
+    new Vector3f(
+      entity.alignment.position.x,
+      entity.alignment.position.y + entity.boundingBox.yRange,
       entity.alignment.position.z
     )
 

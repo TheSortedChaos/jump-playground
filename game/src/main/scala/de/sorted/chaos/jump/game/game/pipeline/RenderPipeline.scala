@@ -76,7 +76,9 @@ object RenderPipeline {
 
     val block1Mvp  = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-8.0f, -0.05f, 0.0f))
     val block2Mvp  = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(8.0f, -0.05f, 0.0f))
+    val block3Mvp  = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-3.0f, 2.95f, 0.0f))
     TextureRenderer.draw(block1Mvp, block)
     TextureRenderer.draw(block2Mvp, block)
+    TextureRenderer.draw(block3Mvp, block)
   }
 }

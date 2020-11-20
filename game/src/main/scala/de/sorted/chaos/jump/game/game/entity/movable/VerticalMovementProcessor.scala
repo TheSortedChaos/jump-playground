@@ -8,10 +8,12 @@ object VerticalMovementProcessor {
 
   def next(entity: MovableEntity, level: Level, jumpVelocity: Float, isJumping: Boolean): MovableEntity = {
     val distanceToBottom = DistanceSensor.shootRayToGround(entity, level)
-    val distanceToUp     = DistanceSensor.shootRayToSky(entity, level)
+    val distanceToTop     = DistanceSensor.shootRayToSky(entity, level)
     val jumpEntity       = maybeStartJump(entity, isJumping, distanceToBottom)
 
-    (jumpEntity.timings.jumpTimer.isDefined, distanceToBottom, distanceToUp) match {
+    println(s"distance to bottom = $distanceToBottom - distance to top = $distanceToTop")
+
+    (jumpEntity.timings.jumpTimer.isDefined, distanceToBottom, distanceToTop) match {
       case (false, distance, _) if distance <= Delta => entity.resetTimings
       case (false, distance, _) if distance > Delta  => falling(entity, level.gravityForFall)
       case (true, _, distance) if distance <= Delta  => entity.startFallTiming
