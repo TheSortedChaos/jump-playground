@@ -2,6 +2,13 @@
 
 Here I try to document the history of that project...
 
+## 2020-11-21
+Cleanup the DistanceSensor stuff.
+Sometimes when game is starting the player falls thru the ground, at the moment I'm not sure why.
+I'm also a bit unhappy with all this timer stuff, but for the moment I think it's good to go.
+
+Video: https://www.youtube.com/watch?v=G9iqJod47rA
+
 ## 2020-11-20
 I refactor the whole movement mechanics.
 I introduce rays for distance measurements for falling and jumping.
@@ -48,11 +55,19 @@ Implement controls for moving a textured cube.
 Thinking about data structure for a level.
 Reorganize the project for a module approach.
 
+##2020-11-03
+Created a simple animation from .obj files.
+For that multiple files are read and played in a loop.
+
+Video: https://www.youtube.com/watch?v=jk6NiqBE6i0
+
 ## 2020-10-30
 Start thinking about 3d animation.
 
 ## 2020-10-06
 Today initial stuff was created for drawing a textured cube.
+
+Video: https://www.youtube.com/watch?v=ko3-z1awMAE
 
 ## 2020-10-02
 An idea is born...
