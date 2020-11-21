@@ -1,5 +1,6 @@
 package de.sorted.chaos.jump.game.game.entity.movable
 
+import de.sorted.chaos.jump.game.game.entity.movable.sensor.distance.DistanceSensor
 import de.sorted.chaos.jump.game.game.pipeline.Level
 
 object VerticalMovementProcessor {
@@ -7,11 +8,9 @@ object VerticalMovementProcessor {
   private val Delta = 0.1f
 
   def next(entity: MovableEntity, level: Level, jumpVelocity: Float, isJumping: Boolean): MovableEntity = {
-    val distanceToBottom = DistanceSensor.shootRayToGround(entity, level)
-    val distanceToTop     = DistanceSensor.shootRayToSky(entity, level)
+    val distanceToBottom = DistanceSensor.getDistanceToBottom(entity, level)
+    val distanceToTop    = DistanceSensor.getDistanceToTop(entity, level)
     val jumpEntity       = maybeStartJump(entity, isJumping, distanceToBottom)
-
-    println(s"distance to bottom = $distanceToBottom - distance to top = $distanceToTop")
 
     (jumpEntity.timings.jumpTimer.isDefined, distanceToBottom, distanceToTop) match {
       case (false, distance, _) if distance <= Delta => entity.resetTimings

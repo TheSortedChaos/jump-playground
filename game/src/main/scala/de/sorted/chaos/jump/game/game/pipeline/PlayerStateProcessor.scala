@@ -21,7 +21,6 @@ object PlayerStateProcessor {
     val velocityX = configuration.gameConfiguration.playerMovement.velocityX
     val velocityY = configuration.gameConfiguration.playerMovement.velocityY
 
-
     val horizontal = (playerModifiers.direction, playerModifiers.velocity) match {
       case (Direction.LEFT, Velocity.WALK)  => HorizontalMovementProcessor.next(previousPlayerState, level, -velocityX)
       case (Direction.RIGHT, Velocity.WALK) => HorizontalMovementProcessor.next(previousPlayerState, level, velocityX)
@@ -34,7 +33,6 @@ object PlayerStateProcessor {
       velocityY,
       playerModifiers.jump
     )
-
 
     vertical
   }
