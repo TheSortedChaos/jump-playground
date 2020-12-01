@@ -15,7 +15,7 @@ object Level {
   def init: Level =
     Level(
       Vector(
-        new AABBf(-15.0f, -1.55f, -2.0f, 15.0f, -1.05f, 2.0f),
+        new AABBf(-36.0f, -3.0f, -4.0f, 36.0f, -1.05f, 4.0f),
         new AABBf(-9.0f, -1.05f, -1.0f, -7.0f, 0.95f, 1.0f),
         new AABBf(7.0f, -1.05f, -1.0f, 9.0f, 0.95f, 1.0f),
         new AABBf(-4.0f, 1.95f, -1.0f, -2.0f, 3.95f, 1.0f)
