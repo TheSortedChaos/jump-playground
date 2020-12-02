@@ -2,6 +2,15 @@
 
 Here I try to document the history of that project...
 
+## 2020-12-02
+Extend the level editor/transformer.
+
+## 2020-12-01
+I thought about a level editor. 
+First idea was a swing/awt kind of application, but this will probably take too long.
+Next idea was using .png images and using colors to encode level object.
+I wrote a small transformer to transform a .png file to a .json file.
+
 ## 2020-11-21
 Cleanup the DistanceSensor stuff.
 Sometimes when game is starting the player falls thru the ground, at the moment I'm not sure why.
