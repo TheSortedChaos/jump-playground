@@ -1,6 +1,6 @@
 package de.sorted.chaos.jump.game.game.entity.movable
 
-import de.sorted.chaos.jump.game.game.entity.{Alignment, BoundingBox, movable}
+import de.sorted.chaos.jump.game.game.entity.{ movable, Alignment, BoundingBox }
 import de.sorted.chaos.jump.game.game.pipeline.Level
 import org.joml.AABBf
 
@@ -8,8 +8,8 @@ object HorizontalMovementProcessor {
 
   def next(entity: MovableEntity, level: Level, horizontalVelocity: Float): MovableEntity = {
     val (deltaTime, newTiming) = entity.timings.getDeltaTime
-    val newAlignment = updatePositionX(entity, horizontalVelocity, deltaTime)
-    val boundingBox = HorizontalMovementProcessor.getBoundingBox(newAlignment, entity.boundingBox)
+    val newAlignment           = updatePositionX(entity, horizontalVelocity, deltaTime)
+    val boundingBox            = HorizontalMovementProcessor.getBoundingBox(newAlignment, entity.boundingBox)
 
     if (level.entityIntersectWithLevelBoundingBox(boundingBox)) {
       MovableEntity(
@@ -27,8 +27,8 @@ object HorizontalMovementProcessor {
   }
 
   private def updatePositionX(movableEntity: MovableEntity, horizontalVelocity: Float, deltaTime: Long) = {
-    val lastPosition           = movableEntity.alignment.position.x
-    val newPosition            = lastPosition + (horizontalVelocity / 1000.0f * deltaTime)
+    val lastPosition = movableEntity.alignment.position.x
+    val newPosition  = lastPosition + (horizontalVelocity / 1000.0f * deltaTime)
 
     if (horizontalVelocity < 0.0f) {
       movableEntity.alignment.turnLeft.updatePositionX(newPosition)
