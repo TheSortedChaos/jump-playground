@@ -11,9 +11,9 @@ import org.lwjgl.opengl.GL11.{ glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
 
 object RenderPipeline {
 
-  private val Hero  = Entity.TexturedCube
-  private val Brix  = Entity.GroundStoneBase
-  private val Block = Entity.TexturedBlock
+  private val Hero  = Entity.Block
+  private val Ground  = Entity.Ground
+  private val Pillar = Entity.Pillar
 
   def draw(gameState: GameState): Unit = {
     val windowId             = gameState.windowId
@@ -24,7 +24,7 @@ object RenderPipeline {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     drawHero(projectionViewMatrix, playerState, Hero)
-    drawLevel(projectionViewMatrix, Brix, Block)
+    drawLevel(projectionViewMatrix, Ground, Pillar)
     glfwSwapBuffers(windowId)
     glfwPollEvents()
   }
@@ -43,14 +43,14 @@ object RenderPipeline {
 
   private def drawLevel(projectionViewMatrix: Matrix4f, ground: TexturedEntity, block: TexturedEntity): Unit = {
     val brix1Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(0.0f, -2.0f, 0.0f))
-    val brix2Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-8.0f, -2.0f, 0.0f))
-    val brix3Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(8.0f, -2.0f, 0.0f))
-    val brix4Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-16.0f, -2.0f, 0.0f))
-    val brix5Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(16.0f, -2.0f, 0.0f))
-    val brix6Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-24.0f, -2.0f, 0.0f))
-    val brix7Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(24.0f, -2.0f, 0.0f))
-    val brix8Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-32.0f, -2.0f, 0.0f))
-    val brix9Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(32.0f, -2.0f, 0.0f))
+    val brix2Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-2.0f, -2.0f, 0.0f))
+    val brix3Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(2.0f, -2.0f, 0.0f))
+    val brix4Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-4.0f, -2.0f, 0.0f))
+    val brix5Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(4.0f, -2.0f, 0.0f))
+    val brix6Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-6.0f, -2.0f, 0.0f))
+    val brix7Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(6.0f, -2.0f, 0.0f))
+    val brix8Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-8.0f, -2.0f, 0.0f))
+    val brix9Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(8.0f, -2.0f, 0.0f))
 //    val brix10Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(4.0f, -2.0f, 0.0f))
 //    val brix11Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(6.0f, -2.0f, 0.0f))
 //    val brix12Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(8.0f, -2.0f, 0.0f))

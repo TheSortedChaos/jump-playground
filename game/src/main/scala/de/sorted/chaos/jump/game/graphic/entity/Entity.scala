@@ -5,16 +5,11 @@ import de.sorted.chaos.jump.game.graphic.render.texture.TexturedEntity
 
 object Entity {
 
-  val GroundStoneBase: TexturedEntity = TexturedEntity.createFrom(
-    "/entity/ground/stone-base.obj",
-    Texture.LowPolyTexture
-  )
+  val Ground: TexturedEntity = TexturedEntity.createFrom("/entity/level/ground.obj", Texture.LowPolyTexture)
 
-  val TexturedCube: TexturedEntity = TexturedEntity.createFrom("/entity/cube/cube.obj", Texture.CubeTexture)
+  val Block: TexturedEntity = TexturedEntity.createFrom("/entity/level/block.obj", Texture.LowPolyTexture)
 
-  val TexturedBrix: TexturedEntity = TexturedEntity.createFrom("/entity/brix/brix.obj", Texture.BrixTexture)
-
-  val TexturedBlock: TexturedEntity = TexturedEntity.createFrom("/entity/cube/cube.obj", Texture.LowPolyTexture)
+  val Pillar: TexturedEntity = TexturedEntity.createFrom("/entity/level/pillar.obj", Texture.LowPolyTexture)
 
   val walkingHero: AnimatedEntity = AnimatedEntity.createFrom(
     List(
