@@ -1,5 +1,6 @@
 package de.sorted.chaos.jump.editor
 
+import de.sorted.chaos.jump.domain.level.Level
 import de.sorted.chaos.jump.editor.importer.{Image, SaveFile, Tile, Transformer}
 
 object Exporter {
@@ -16,5 +17,8 @@ object Exporter {
     SaveFile.to(Filename, json)
 
     println(json)
+
+    val x = decode[Level](json)
+    println(x)
   }
 }

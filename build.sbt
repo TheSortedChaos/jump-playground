@@ -26,6 +26,7 @@ lazy val game = project
     name := "game",
     settings,
     libraryDependencies ++=
+      jsonDependencies ++
       loggingDependencies ++
       testingDependencies ++
       lwjglDependencies ++

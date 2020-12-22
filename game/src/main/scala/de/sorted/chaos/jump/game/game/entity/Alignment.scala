@@ -75,7 +75,7 @@ object Alignment {
   private val AngleForRightDirection = 90.0f
 
   private[entity] def init: Alignment = Alignment(
-    position = new Vector3f(0.0f, 15.0f, 0.0f),
+    position = new Vector3f(1.0f, 3.0f, 0.0f),
     rotation = new Vector3f(0.0f, 0.0f, 0.0f),
     scale    = new Vector3f(1.0f, 1.0f, 1.0f)
   )

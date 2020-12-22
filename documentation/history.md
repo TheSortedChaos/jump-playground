@@ -2,6 +2,11 @@
 
 Here I try to document the history of that project...
 
+## 2020-12-22
+I started the Level Loader, for getting the level into the game.
+I decided for a first data structure to represent the level and got a first render.
+Unfortunately it seems that during export from Blender the coordinates got mixed up.
+
 ## 2020-12-02
 Extend the level editor/transformer.
 
