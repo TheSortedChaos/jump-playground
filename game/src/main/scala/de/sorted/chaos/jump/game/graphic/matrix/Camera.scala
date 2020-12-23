@@ -9,7 +9,7 @@ object Camera {
     new Matrix4f().setLookAt(
       0.0f, //player.alignment.position.x,
       player.alignment.position.y + 8.0f,
-      30.0f,
+      10.0f,
       player.alignment.position.x,
       player.alignment.position.y,
       player.alignment.position.z,

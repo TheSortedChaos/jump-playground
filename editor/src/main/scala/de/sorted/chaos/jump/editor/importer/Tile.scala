@@ -24,7 +24,7 @@ object Tile {
         val color = image.getRGB(x * 10 + 5, y * 10 + 5)
         val rgb   = getColor(color)
 
-        Tile(Position(x, y), rgb)
+        Tile(Position(x, height - y), rgb)
       }
 
     result.toVector

@@ -24,7 +24,7 @@ object RenderPipeline {
     val projectionViewMatrix = MatrixStack.getProjectionViewMatrix(configuration, playerState)
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    drawHero(projectionViewMatrix, playerState, Hero)
+ //   drawHero(projectionViewMatrix, playerState, Hero)
     drawLevel(projectionViewMatrix, Ground, Pillar)
     glfwSwapBuffers(windowId)
     glfwPollEvents()
