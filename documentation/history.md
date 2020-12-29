@@ -2,9 +2,16 @@
 
 Here I try to document the history of that project...
 
+## 2020-12-29
+Finished first QuadTree implementation (not the nicest piece of code)
+
+## 2020-12-28
+I got a first running quad tree implementation (only data at the leaves, no list of data in the node).
+Unfortunately it's not as clean as I want it to be, but it's good do go for now.
+Some small clean up I should do next, but it will not resolve the fact that this is an 'ugly' implementation ;/
+
 ## 2020-12-24
 Start doing research and first implementation of QuadTrees.
-
 
 ## 2020-12-23
 Start doing research on frustum culling.
