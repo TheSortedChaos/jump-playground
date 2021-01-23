@@ -18,7 +18,7 @@ final case class Boundary(bottomLeft: Position, topRight: Position) {
     position.x >= this.bottomLeft.x && position.x <= this.topRight.x &&
       position.y >= this.bottomLeft.y && position.y <= this.topRight.y
 
-  // Here I have created a little problem and I should think about, sometime ;)
+  // Here I have created a little problem and I should think about it, sometime ;)
   // I can't include both positions, because this would add one data point multiple times
   // With the current approach there is also a little problem:
   //    If a data point is added exactly on topRight of the initial Tree -> the data point is not included to the Tree

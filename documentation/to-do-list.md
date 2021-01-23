@@ -3,7 +3,11 @@
 This is the todo list.
 The second brain for not-forgetting stuff.
 
+ !!!!! 
 * add assets (e.g. blender file to repo (in extra folder)) 
+* remove shared
+
+
 
 # Task
 - LevelEditor/Importer/Exporter from png file

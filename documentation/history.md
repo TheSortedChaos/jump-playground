@@ -2,6 +2,13 @@
 
 Here I try to document the history of that project...
 
+## 2021-01-05
+I cleaned up the Image2Json converter ('The LevelEditor')
+
+## 2021-01-04
+I combined the QuadTree with the LevelLoader.
+Now I have a first prototype for rendering a level, based on a QuadTree query.
+
 ## 2020-12-29
 Finished first QuadTree implementation (not the nicest piece of code)
 

@@ -13,7 +13,7 @@ final case class Tile(position: Position, color: Color)
 
 object Tile {
 
-  private val TileSize = 10
+  private val TileSize = 5
 
   def getTiles(image: BufferedImage): Vector[Tile] = {
     val width  = image.getWidth / TileSize
@@ -21,7 +21,7 @@ object Tile {
     val result =
       for (y <- 0 until height;
            x <- 0 until width) yield {
-        val color = image.getRGB(x * 10 + 5, y * 10 + 5)
+        val color = image.getRGB(x * TileSize + 2, y * TileSize + 2)
         val rgb   = getColor(color)
 
         Tile(Position(x, height - y), rgb)

@@ -8,9 +8,9 @@ import scala.annotation.tailrec
 //noinspection ScalaStyle
 object Transformer {
 
-  private val FloorColor         = Color(0, 0, 255)
-  private val BlockColor         = Color(0, 0, 200)
-  private val PillarColor        = Color(0, 0, 225)
+  private val FloorColor         = Color(160, 160, 160)
+  private val BlockColor         = Color(140, 140, 140)
+  private val PillarColor        = Color(160, 100, 40)
   private val StartPositionColor = Color(255, 255, 0)
 
   def transform2(tiles: Vector[Tile]): Level = {

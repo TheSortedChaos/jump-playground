@@ -9,7 +9,7 @@ lazy val global = project
   .settings(name := "jump-playground", settings)
   .aggregate(
     game,
-    editor
+    utilities
   )
 
 lazy val shared = project
@@ -37,9 +37,9 @@ lazy val game = project
   )
   .dependsOn(shared)
 
-lazy val editor = project
+lazy val utilities = project
   .settings(
-    name := "editor",
+    name := "utilities",
     settings,
     libraryDependencies ++=
       jsonDependencies ++
