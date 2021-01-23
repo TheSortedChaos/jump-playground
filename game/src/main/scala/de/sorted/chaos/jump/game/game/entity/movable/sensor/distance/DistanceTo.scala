@@ -1,9 +1,9 @@
 package de.sorted.chaos.jump.game.game.entity.movable.sensor.distance
 
 import de.sorted.chaos.jump.game.game.entity.movable.MovableEntity
-import de.sorted.chaos.jump.game.game.entity.movable.sensor.distance.DistanceToGroundSensor.{RayLength, createRays, getDistance}
+import de.sorted.chaos.jump.game.game.entity.movable.sensor.distance.DistanceToGroundSensor.{ createRays, getDistance, RayLength }
 import de.sorted.chaos.jump.game.game.pipeline.Level
-import org.joml.{AABBf, Rayf, Vector3f}
+import org.joml.{ AABBf, Rayf, Vector3f }
 
 trait DistanceTo {
 

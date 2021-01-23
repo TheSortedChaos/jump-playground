@@ -58,7 +58,7 @@ object Window {
       (windowId, key, scancode, action, mods) =>
         if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
           glfwSetWindowShouldClose(windowId, true)
-        }
+      }
     )
 
   private def centerWindow(windowId: Long): Unit = {

@@ -2,18 +2,22 @@ package de.sorted.chaos.jump.game.game.pipeline
 
 import de.sorted.chaos.jump.game.game.GameState
 import de.sorted.chaos.jump.game.game.entity.movable.MovableEntity
+import de.sorted.chaos.jump.game.game.level.{ LevelDataObject, LevelLoader }
 import de.sorted.chaos.jump.game.graphic.entity.Entity
 import de.sorted.chaos.jump.game.graphic.matrix.MatrixStack
-import de.sorted.chaos.jump.game.graphic.render.texture.{TextureRenderer, TexturedEntity}
+import de.sorted.chaos.jump.game.graphic.render.texture.{ TextureRenderer, TexturedEntity }
+import de.sorted.chaos.jump.game.utils.datastructure.quadtree.QuadTree
 import org.joml.Matrix4f
-import org.lwjgl.glfw.GLFW.{glfwPollEvents, glfwSwapBuffers}
-import org.lwjgl.opengl.GL11.{GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, glClear}
+import org.lwjgl.glfw.GLFW.{ glfwPollEvents, glfwSwapBuffers }
+import org.lwjgl.opengl.GL11.{ glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT }
 
 object RenderPipeline {
 
-  private val Hero = Entity.TexturedCube
-  private val Brix = Entity.TexturedBrix
-  private val Block = Entity.TexturedBlock
+  private val Hero         = Entity.Block
+  private val Ground       = Entity.Ground
+  private val Pillar       = Entity.Pillar
+  private val Level01      = LevelPipeline.loadLevel("/level/level-01.json")
+  private val Level01Alpha = LevelLoader.load("/level/level-01.json")
 
   def draw(gameState: GameState): Unit = {
     val windowId             = gameState.windowId
@@ -23,8 +27,9 @@ object RenderPipeline {
     val projectionViewMatrix = MatrixStack.getProjectionViewMatrix(configuration, playerState)
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    drawHero(projectionViewMatrix, playerState, Hero)
-    drawLevel(projectionViewMatrix, Brix, Block)
+    //   drawHero(projectionViewMatrix, playerState, Hero)
+    // drawLevel(projectionViewMatrix, Ground, Pillar)
+    drawLevelAlpha(Level01Alpha, projectionViewMatrix)
     glfwSwapBuffers(windowId)
     glfwPollEvents()
   }
@@ -41,44 +46,9 @@ object RenderPipeline {
     TextureRenderer.draw(mvp, hero)
   }
 
-  private def drawLevel(projectionViewMatrix: Matrix4f, brix: TexturedEntity, block: TexturedEntity): Unit = {
-    val brix1Mvp  = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(0.0f, -1.3f, 0.0f))
-    val brix2Mvp  = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-2.0f, -1.3f, 0.0f))
-    val brix3Mvp  = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-4.0f, -1.3f, 0.0f))
-    val brix4Mvp  = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-6.0f, -1.3f, 0.0f))
-    val brix5Mvp  = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-8.0f, -1.3f, 0.0f))
-    val brix6Mvp  = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-10.0f, -1.3f, 0.0f))
-    val brix7Mvp  = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-12.0f, -1.3f, 0.0f))
-    val brix8Mvp  = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-14.0f, -1.3f, 0.0f))
-    val brix9Mvp  = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(2.0f, -1.3f, 0.0f))
-    val brix10Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(4.0f, -1.3f, 0.0f))
-    val brix11Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(6.0f, -1.3f, 0.0f))
-    val brix12Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(8.0f, -1.3f, 0.0f))
-    val brix13Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(10.0f, -1.3f, 0.0f))
-    val brix14Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(12.0f, -1.3f, 0.0f))
-    val brix15Mvp = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(14.0f, -1.3f, 0.0f))
+  private def drawLevel(projectionViewMatrix: Matrix4f, ground: TexturedEntity, block: TexturedEntity): Unit =
+    LevelPipeline.drawLevel(projectionViewMatrix, Level01)
 
-    TextureRenderer.draw(brix1Mvp, brix)
-    TextureRenderer.draw(brix2Mvp, brix)
-    TextureRenderer.draw(brix3Mvp, brix)
-    TextureRenderer.draw(brix4Mvp, brix)
-    TextureRenderer.draw(brix5Mvp, brix)
-    TextureRenderer.draw(brix6Mvp, brix)
-    TextureRenderer.draw(brix7Mvp, brix)
-    TextureRenderer.draw(brix8Mvp, brix)
-    TextureRenderer.draw(brix9Mvp, brix)
-    TextureRenderer.draw(brix10Mvp, brix)
-    TextureRenderer.draw(brix11Mvp, brix)
-    TextureRenderer.draw(brix12Mvp, brix)
-    TextureRenderer.draw(brix13Mvp, brix)
-    TextureRenderer.draw(brix14Mvp, brix)
-    TextureRenderer.draw(brix15Mvp, brix)
-
-    val block1Mvp  = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-8.0f, -0.05f, 0.0f))
-    val block2Mvp  = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(8.0f, -0.05f, 0.0f))
-    val block3Mvp  = new Matrix4f(projectionViewMatrix).mul(new Matrix4f().translate(-3.0f, 2.95f, 0.0f))
-    TextureRenderer.draw(block1Mvp, block)
-    TextureRenderer.draw(block2Mvp, block)
-    TextureRenderer.draw(block3Mvp, block)
-  }
+  private def drawLevelAlpha(quadTree: QuadTree[LevelDataObject], projectionViewMatrix: Matrix4f): Unit =
+    LevelLoader.drawLevel(quadTree, projectionViewMatrix)
 }

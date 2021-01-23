@@ -9,7 +9,7 @@ lazy val global = project
   .settings(name := "jump-playground", settings)
   .aggregate(
     game,
-    editor
+    utilities
   )
 
 lazy val shared = project
@@ -26,6 +26,7 @@ lazy val game = project
     name := "game",
     settings,
     libraryDependencies ++=
+      jsonDependencies ++
       loggingDependencies ++
       testingDependencies ++
       lwjglDependencies ++
@@ -36,11 +37,12 @@ lazy val game = project
   )
   .dependsOn(shared)
 
-lazy val editor = project
+lazy val utilities = project
   .settings(
-    name := "editor",
+    name := "utilities",
     settings,
     libraryDependencies ++=
+      jsonDependencies ++
       loggingDependencies ++
       testingDependencies :+
       dependencies.pureConfig
@@ -53,6 +55,7 @@ lazy val dependencies = new {
 
   val osClassifier = "macos" // TODO: Change to "linux" or "windows" if necessary
 
+  val circeVersion           = "0.12.3"
   val jomlVersion            = "1.9.19"
   val logbackVersion         = "1.2.3"
   val lwjglVersion           = "3.2.3"
@@ -61,6 +64,9 @@ lazy val dependencies = new {
   val slf4jVersion           = "1.7.30"
   val wavefrontReaderVersion = "1.0.0"
 
+  val circeCore         = "io.circe"                  %% "circe-core"       % circeVersion
+  val circeGeneric      = "io.circe"                  %% "circe-generic"    % circeVersion
+  val circeParser       = "io.circe"                  %% "circe-parser"     % circeVersion
   val joml              = "org.joml"                  % "joml"              % jomlVersion
   val logback           = "ch.qos.logback"            % "logback-core"      % logbackVersion
   val logbackClassic    = "ch.qos.logback"            % "logback-classic"   % logbackVersion
@@ -78,6 +84,12 @@ lazy val dependencies = new {
   val slf4j             = "org.slf4j"                 % "slf4j-api"         % slf4jVersion
   val wavefrontReader   = "com.github.thesortedchaos" %% "wavefront-reader" % wavefrontReaderVersion
 }
+
+lazy val jsonDependencies = Seq(
+  dependencies.circeCore,
+  dependencies.circeGeneric,
+  dependencies.circeParser
+)
 
 lazy val loggingDependencies = Seq(
   dependencies.logback,

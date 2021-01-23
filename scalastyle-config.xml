@@ -31,7 +31,7 @@
   <check class="org.scalastyle.scalariform.EqualsHashCodeChecker" enabled="true" level="warn"/>
   <check class="org.scalastyle.scalariform.IllegalImportsChecker" enabled="true" level="warn">
     <parameters>
-      <parameter name="illegalImports"><![CDATA[sun._,java.awt._]]></parameter>
+      <parameter name="illegalImports"><![CDATA[sun._]]></parameter>
     </parameters>
   </check>
   <check class="org.scalastyle.scalariform.ParameterNumberChecker" enabled="true" level="warn">
@@ -39,7 +39,7 @@
       <parameter name="maxParameters"><![CDATA[8]]></parameter>
     </parameters>
   </check>
-  <check class="org.scalastyle.scalariform.MagicNumberChecker" enabled="true" level="warn">
+  <check class="org.scalastyle.scalariform.MagicNumberChecker" enabled="false" level="warn">
     <parameters>
       <parameter name="ignore"><![CDATA[-1,0,1,2,3,4]]></parameter>
     </parameters>

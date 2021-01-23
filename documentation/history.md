@@ -2,6 +2,41 @@
 
 Here I try to document the history of that project...
 
+## 2021-01-05
+I cleaned up the Image2Json converter ('The LevelEditor')
+
+## 2021-01-04
+I combined the QuadTree with the LevelLoader.
+Now I have a first prototype for rendering a level, based on a QuadTree query.
+
+## 2020-12-29
+Finished first QuadTree implementation (not the nicest piece of code)
+
+## 2020-12-28
+I got a first running quad tree implementation (only data at the leaves, no list of data in the node).
+Unfortunately it's not as clean as I want it to be, but it's good do go for now.
+Some small clean up I should do next, but it will not resolve the fact that this is an 'ugly' implementation ;/
+
+## 2020-12-24
+Start doing research and first implementation of QuadTrees.
+
+## 2020-12-23
+Start doing research on frustum culling.
+
+## 2020-12-22
+I started the Level Loader, for getting the level into the game.
+I decided for a first data structure to represent the level and got a first render.
+Unfortunately it seems that during export from Blender the coordinates got mixed up.
+
+## 2020-12-02
+Extend the level editor/transformer.
+
+## 2020-12-01
+I thought about a level editor. 
+First idea was a swing/awt kind of application, but this will probably take too long.
+Next idea was using .png images and using colors to encode level object.
+I wrote a small transformer to transform a .png file to a .json file.
+
 ## 2020-11-21
 Cleanup the DistanceSensor stuff.
 Sometimes when game is starting the player falls thru the ground, at the moment I'm not sure why.

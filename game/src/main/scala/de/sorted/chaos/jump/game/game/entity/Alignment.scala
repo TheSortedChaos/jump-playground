@@ -33,8 +33,12 @@ final case class Alignment(position: Vector3f, rotation: Vector3f, scale: Vector
     } else {
       Alignment(
         position = new Vector3f(this.position.x, this.position.y, this.position.z),
-        rotation = new Vector3f(this.rotation.x, AngleForLeftDirection, this.rotation.z),
-        scale    = new Vector3f(this.scale.x, this.scale.y, this.scale.z)
+        rotation = new Vector3f(
+          this.rotation.x,
+          AngleForLeftDirection,
+          this.rotation.z
+        ),
+        scale = new Vector3f(this.scale.x, this.scale.y, this.scale.z)
       )
     }
 
@@ -44,8 +48,12 @@ final case class Alignment(position: Vector3f, rotation: Vector3f, scale: Vector
     } else {
       Alignment(
         position = new Vector3f(this.position.x, this.position.y, this.position.z),
-        rotation = new Vector3f(this.rotation.x, AngleForRightDirection, this.rotation.z),
-        scale    = new Vector3f(this.scale.x, this.scale.y, this.scale.z)
+        rotation = new Vector3f(
+          this.rotation.x,
+          AngleForRightDirection,
+          this.rotation.z
+        ),
+        scale = new Vector3f(this.scale.x, this.scale.y, this.scale.z)
       )
     }
 
@@ -67,7 +75,7 @@ object Alignment {
   private val AngleForRightDirection = 90.0f
 
   private[entity] def init: Alignment = Alignment(
-    position = new Vector3f(0.0f, 15.0f, 0.0f),
+    position = new Vector3f(1.0f, 3.0f, 0.0f),
     rotation = new Vector3f(0.0f, 0.0f, 0.0f),
     scale    = new Vector3f(1.0f, 1.0f, 1.0f)
   )
